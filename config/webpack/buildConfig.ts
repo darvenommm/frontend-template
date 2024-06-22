@@ -2,6 +2,7 @@ import { buildLoaders } from './buildLoaders';
 import { buildPlugins } from './buildPlugins';
 import { buildResolve } from './buildResolve';
 import { buildDevServer } from './buildDevServer';
+import { buildOptimization } from './buildOptimization';
 
 import type { Configuration } from 'webpack';
 
@@ -14,7 +15,7 @@ export const buildConfig = (options: IBuildOptions): Configuration => {
     mode: mode,
     entry: paths.entry,
     output: {
-      filename: '[name].[contenthash:8].bundle.js',
+      filename: '[name].[contenthash:12].bundle.js',
       path: paths.output,
       clean: true,
     },
@@ -25,5 +26,6 @@ export const buildConfig = (options: IBuildOptions): Configuration => {
     resolve: buildResolve(options),
     devServer: buildDevServer(options),
     devtool: isDevelopment && 'eval-source-map',
+    optimization: buildOptimization(),
   };
 };

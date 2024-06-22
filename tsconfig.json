@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "public/*": ["./public/*"]
     },
     "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },

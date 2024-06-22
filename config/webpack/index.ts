@@ -1,3 +1,3 @@
 export { buildConfig } from './buildConfig';
 
-export type { IBuildOptions, BuildMode, IBuildPaths } from './types/types';
+export type { IBuildOptions, BuildMode, IBuildPaths, NeedOpening } from './types/types';

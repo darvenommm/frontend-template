@@ -5,6 +5,7 @@ import type { IBuildOptions } from './types/types';
 export const buildDevServer = ({
   paths,
   port,
+  needOpening,
 }: IBuildOptions): DevServerConfiguration => {
   return {
     static: {
@@ -12,7 +13,7 @@ export const buildDevServer = ({
     },
     historyApiFallback: true,
     hot: true,
-    open: true,
+    open: needOpening,
     port,
   };
 };

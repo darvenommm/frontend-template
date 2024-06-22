@@ -1,9 +1,10 @@
 import { join } from 'node:path';
 
+import { ProgressPlugin, DefinePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
-import { ProgressPlugin, DefinePlugin } from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 import type { Configuration } from 'webpack';
 
@@ -19,13 +20,26 @@ export const buildPlugins = ({
     template: join(paths.public, 'index.html'),
   });
 
+  const definePlugin = new DefinePlugin({
+    __IS_PROD__: JSON.stringify(isProduction),
+    __IS_DEV__: JSON.stringify(isDevelopment),
+  });
+
+  const copyPlugin = new CopyPlugin({
+    patterns: [
+      {
+        from: paths.public,
+        to: paths.output,
+        globOptions: {
+          ignore: [join(paths.public, 'index.html')],
+        },
+      },
+    ],
+  });
+
   const hotModulePlugin = new ReactRefreshWebpackPlugin();
   const progressPlugin = new ProgressPlugin();
   const stylePlugin = new MiniCssExtractPlugin();
-  const definePlugin = new DefinePlugin({
-    __IS_PROD__: JSON.stringify(isProduction),
-    __IS_DEV__: JSON.stringify(isProduction),
-  });
 
   const commonPlugins = [htmlPlugin, definePlugin];
 
@@ -34,6 +48,6 @@ export const buildPlugins = ({
   }
 
   if (isProduction) {
-    return [...commonPlugins, stylePlugin];
+    return [...commonPlugins, stylePlugin, copyPlugin];
   }
 };

@@ -13,6 +13,18 @@ declare module '*.module.sass' {
   export default classes;
 }
 
+declare module '*.css' {
+  export default undefined;
+}
+
+declare module '*.scss' {
+  export default undefined;
+}
+
+declare module '*.sass' {
+  export default undefined;
+}
+
 declare module '*.png' {
   const imageSrc: string;
   export default imageSrc;
@@ -48,31 +60,6 @@ declare module '*.txt' {
   export default text;
 }
 
-declare module '*.woff' {
-  const fontSrc: string;
-  export default fontSrc;
-}
-
-declare module '*.woff2' {
-  const fontSrc: string;
-  export default fontSrc;
-}
-
-declare module '*.eot' {
-  const fontSrc: string;
-  export default fontSrc;
-}
-
-declare module '*.ttf' {
-  const fontSrc: string;
-  export default fontSrc;
-}
-
-declare module '*.otf' {
-  const fontSrc: string;
-  export default fontSrc;
-}
-
 declare module '*.svg' {
   const Svg: React.FunctionComponent<React.SVGProps<SVGElement>>;
   export default Svg;
@@ -82,3 +69,6 @@ declare module '*.svg?url' {
   const svgSrc: string;
   export default svgSrc;
 }
+
+declare const __IS_PROD__: boolean;
+declare const __IS_DEV__: boolean;

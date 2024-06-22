@@ -1,4 +1,7 @@
+type StringBoolean = 'true' | 'false';
+
 export type BuildMode = 'development' | 'production';
+export type NeedOpening = StringBoolean;
 
 export interface IBuildPaths {
   entry: string;
@@ -13,4 +16,5 @@ export interface IBuildOptions {
   isProduction: boolean;
   port: number;
   paths: IBuildPaths;
+  needOpening: boolean;
 }
